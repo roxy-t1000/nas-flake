@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 # SABnzbd (Usenet downloader), managed as a systemd service.
 # Web UI at http://nas.blenny-bramble.ts.net:8090 (Tailscale only).
@@ -11,6 +16,11 @@
 #   Config → Servers: add your Usenet provider
 
 {
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
+    builtins.elem (lib.getName pkg) [
+      "unrar"
+    ];
   users.users.sabnzbd = {
     isSystemUser = true;
     group = "media";
@@ -21,23 +31,26 @@
 
   systemd.services.sabnzbd = {
     description = "SABnzbd";
-    after    = [ "network-online.target" "zfs.target" ];
-    wants    = [ "network-online.target" ];
+    after = [
+      "network-online.target"
+      "zfs.target"
+    ];
+    wants = [ "network-online.target" ];
     wantedBy = [ "multi-user.target" ];
 
     serviceConfig = {
-      Type       = "simple";
-      User       = "sabnzbd";
-      Group      = "media";
-      ExecStart  = "${pkgs.sabnzbd}/bin/sabnzbd --server 0.0.0.0:8090 --config-file /var/lib/sabnzbd/sabnzbd.ini --nodaemon";
-      Restart    = "on-failure";
+      Type = "simple";
+      User = "sabnzbd";
+      Group = "media";
+      ExecStart = "${pkgs.sabnzbd}/bin/sabnzbd --server 0.0.0.0:8090 --config-file /var/lib/sabnzbd/sabnzbd.ini --nodaemon";
+      Restart = "on-failure";
       RestartSec = "5s";
 
       StateDirectory = "sabnzbd";
 
-      PrivateTmp      = true;
-      ProtectSystem   = "strict";
-      ReadWritePaths  = [
+      PrivateTmp = true;
+      ProtectSystem = "strict";
+      ReadWritePaths = [
         "/data/downloads-incomplete"
         "/bulk/downloads"
         "/bulk/media"
