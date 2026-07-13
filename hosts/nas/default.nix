@@ -37,6 +37,12 @@
     ];
   };
 
+  # ── Nix settings ────────────────────────────────────────────────────────────
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
+
   # ── Base packages ───────────────────────────────────────────────────────────
   environment.systemPackages = with pkgs; [
     # agenix # secret management CLI
@@ -44,6 +50,8 @@
     lsof
     smartmontools
     hdparm
+    vim
+    git
   ];
 
   # ── SSH ─────────────────────────────────────────────────────────────────────
