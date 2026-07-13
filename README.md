@@ -43,13 +43,13 @@ NixOS configuration for a ZFS-based NAS with qBittorrent, SABnzbd, and Tailscale
    # Physical 4096B → ashift = "12" (already set). Genuine 512B → "9".
    ```
 
-3. **Generate a hostId** and put it in `hosts/nas/default.nix`:
+3. **Get the hostid** and put it in `hosts/nas/default.nix`:
    ```bash
-   head -c4 /dev/urandom | od -A none -t x4 | tr -d ' \n'
+   hostid
    ```
 
 4. **Add your SSH public key** in `hosts/nas/default.nix` under
-   `users.users.jacob.openssh.authorizedKeys.keys`.
+   `users.users.<username>.openssh.authorizedKeys.keys`.
 
 5. **Add your personal public key** to `secrets/secrets.nix`.
 

@@ -12,16 +12,15 @@
 { ... }:
 
 let
-  nvme0 = "/dev/disk/by-id/nvme-CHANGE_ME_0";
-  nvme1 = "/dev/disk/by-id/nvme-CHANGE_ME_1";
-  ssd0  = "/dev/disk/by-id/ata-CHANGE_ME_ssd0";
-  ssd1  = "/dev/disk/by-id/ata-CHANGE_ME_ssd1";
-  hdd0  = "/dev/disk/by-id/ata-CHANGE_ME_hdd0";
-  hdd1  = "/dev/disk/by-id/ata-CHANGE_ME_hdd1";
-  hdd2  = "/dev/disk/by-id/ata-CHANGE_ME_hdd2";
-  hdd3  = "/dev/disk/by-id/ata-CHANGE_ME_hdd3";
-  hdd4  = "/dev/disk/by-id/ata-CHANGE_ME_hdd4";
-  hdd5  = "/dev/disk/by-id/ata-CHANGE_ME_hdd5";
+  nvme0 = "/dev/disk/by-id/nvme-Patriot_M.2_P300_1024GB_P300ZCCB250906723";
+  ssd0 = "/dev/disk/by-id/ata-SSD29604G0016100_LE160202100194F3B";
+  ssd1 = "/dev/disk/by-id/ata-SSD29604G0016100_LE160202100194F3D";
+  hdd0 = "/dev/disk/by-id/ata-HGST_HUH728080ALN604_2EJAB6UX";
+  hdd1 = "/dev/disk/by-id/ata-HGST_HUH728080ALN604_VJG4DDSX";
+  hdd2 = "/dev/disk/by-id/ata-HGST_HUH728080ALN604_VJGPX74X";
+  hdd3 = "/dev/disk/by-id/ata-HGST_HUH728080ALN604_VJGS51MX";
+  hdd4 = "/dev/disk/by-id/ata-ST8000VN0022-2EL112_ZA1HVM80";
+  hdd5 = "/dev/disk/by-id/ata-ST8000VN004-2M2101_WSD956HY";
 in
 {
   disko.devices = {
@@ -46,31 +45,10 @@ in
           };
           zfs = {
             size = "100%";
-            content = { type = "zfs"; pool = "boot"; };
-          };
-        };
-      };
-    };
-
-    disk.nvme1 = {
-      type = "disk";
-      device = nvme1;
-      content = {
-        type = "gpt";
-        partitions = {
-          # Second ESP: not auto-mounted; copy manually for fallback boot.
-          ESP = {
-            size = "1G";
-            type = "EF00";
             content = {
-              type = "filesystem";
-              format = "vfat";
-              # No mountpoint — managed manually as a mirror of the first ESP.
+              type = "zfs";
+              pool = "boot";
             };
-          };
-          zfs = {
-            size = "100%";
-            content = { type = "zfs"; pool = "boot"; };
           };
         };
       };
@@ -83,7 +61,10 @@ in
         type = "gpt";
         partitions.zfs = {
           size = "100%";
-          content = { type = "zfs"; pool = "data"; };
+          content = {
+            type = "zfs";
+            pool = "data";
+          };
         };
       };
     };
@@ -95,30 +76,111 @@ in
         type = "gpt";
         partitions.zfs = {
           size = "100%";
-          content = { type = "zfs"; pool = "data"; };
+          content = {
+            type = "zfs";
+            pool = "data";
+          };
         };
       };
     };
 
-    disk.hdd0 = { type = "disk"; device = hdd0; content = { type = "gpt"; partitions.zfs = { size = "100%"; content = { type = "zfs"; pool = "bulk"; }; }; }; };
-    disk.hdd1 = { type = "disk"; device = hdd1; content = { type = "gpt"; partitions.zfs = { size = "100%"; content = { type = "zfs"; pool = "bulk"; }; }; }; };
-    disk.hdd2 = { type = "disk"; device = hdd2; content = { type = "gpt"; partitions.zfs = { size = "100%"; content = { type = "zfs"; pool = "bulk"; }; }; }; };
-    disk.hdd3 = { type = "disk"; device = hdd3; content = { type = "gpt"; partitions.zfs = { size = "100%"; content = { type = "zfs"; pool = "bulk"; }; }; }; };
-    disk.hdd4 = { type = "disk"; device = hdd4; content = { type = "gpt"; partitions.zfs = { size = "100%"; content = { type = "zfs"; pool = "bulk"; }; }; }; };
-    disk.hdd5 = { type = "disk"; device = hdd5; content = { type = "gpt"; partitions.zfs = { size = "100%"; content = { type = "zfs"; pool = "bulk"; }; }; }; };
+    disk.hdd0 = {
+      type = "disk";
+      device = hdd0;
+      content = {
+        type = "gpt";
+        partitions.zfs = {
+          size = "100%";
+          content = {
+            type = "zfs";
+            pool = "bulk";
+          };
+        };
+      };
+    };
+    disk.hdd1 = {
+      type = "disk";
+      device = hdd1;
+      content = {
+        type = "gpt";
+        partitions.zfs = {
+          size = "100%";
+          content = {
+            type = "zfs";
+            pool = "bulk";
+          };
+        };
+      };
+    };
+    disk.hdd2 = {
+      type = "disk";
+      device = hdd2;
+      content = {
+        type = "gpt";
+        partitions.zfs = {
+          size = "100%";
+          content = {
+            type = "zfs";
+            pool = "bulk";
+          };
+        };
+      };
+    };
+    disk.hdd3 = {
+      type = "disk";
+      device = hdd3;
+      content = {
+        type = "gpt";
+        partitions.zfs = {
+          size = "100%";
+          content = {
+            type = "zfs";
+            pool = "bulk";
+          };
+        };
+      };
+    };
+    disk.hdd4 = {
+      type = "disk";
+      device = hdd4;
+      content = {
+        type = "gpt";
+        partitions.zfs = {
+          size = "100%";
+          content = {
+            type = "zfs";
+            pool = "bulk";
+          };
+        };
+      };
+    };
+    disk.hdd5 = {
+      type = "disk";
+      device = hdd5;
+      content = {
+        type = "gpt";
+        partitions.zfs = {
+          size = "100%";
+          content = {
+            type = "zfs";
+            pool = "bulk";
+          };
+        };
+      };
+    };
 
     # ── Pools ──────────────────────────────────────────────────────────────────
 
     zpool.boot = {
       type = "zpool";
-      mode = "mirror";
+      mode = "";
       options.ashift = "12";
       rootFsOptions = {
-        compression    = "zstd";
-        acltype        = "posixacl";
-        xattr          = "sa";
-        atime          = "off";
-        mountpoint     = "none";
+        compression = "zstd";
+        acltype = "posixacl";
+        xattr = "sa";
+        atime = "off";
+        mountpoint = "none";
         "com.sun:auto-snapshot" = "false";
       };
       datasets = {
@@ -154,8 +216,8 @@ in
       options.ashift = "12";
       rootFsOptions = {
         compression = "zstd";
-        atime       = "off";
-        mountpoint  = "none";
+        atime = "off";
+        mountpoint = "none";
         "com.sun:auto-snapshot" = "false";
       };
       datasets = {
@@ -186,19 +248,28 @@ in
       mode = {
         topology = {
           type = "topology";
-          vdev = [{
-            mode = "raidz2";
-            members = [ "hdd0" "hdd1" "hdd2" "hdd3" "hdd4" "hdd5" ];
-          }];
+          vdev = [
+            {
+              mode = "raidz2";
+              members = [
+                "hdd0"
+                "hdd1"
+                "hdd2"
+                "hdd3"
+                "hdd4"
+                "hdd5"
+              ];
+            }
+          ];
         };
       };
       options.ashift = "12";
       rootFsOptions = {
         compression = "zstd";
-        atime       = "off";
-        mountpoint  = "none";
+        atime = "off";
+        mountpoint = "none";
         # Large sequential reads/writes — 1M recordsize is appropriate.
-        recordsize  = "1M";
+        recordsize = "1M";
         "com.sun:auto-snapshot" = "false";
       };
       datasets = {

@@ -15,17 +15,25 @@
     };
   };
 
-  outputs = { self, nixpkgs, disko, agenix, ... }: {
-    nixosConfigurations.nas = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [
-        disko.nixosModules.disko
-        agenix.nixosModules.default
-        ./hosts/nas
-      ];
-    };
+  outputs =
+    {
+      self,
+      nixpkgs,
+      disko,
+      agenix,
+      ...
+    }:
+    {
+      nixosConfigurations.sylphiette = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          disko.nixosModules.disko
+          agenix.nixosModules.default
+          ./hosts/nas
+        ];
+      };
 
-    # Convenience: run `nix run .#agenix -- -e secrets/foo.age` from flake root
-    packages.x86_64-linux.agenix = agenix.packages.x86_64-linux.default;
-  };
+      # Convenience: run `nix run .#agenix -- -e secrets/foo.age` from flake root
+      packages.x86_64-linux.agenix = agenix.packages.x86_64-linux.default;
+    };
 }
