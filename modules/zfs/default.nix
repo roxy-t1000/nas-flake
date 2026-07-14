@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   # ── Kernel / boot ────────────────────────────────────────────────────────────
@@ -37,29 +42,42 @@
     templates = {
       # Frequently-changing data: keep fine-grained short-term, less long-term.
       frequent = {
-        hourly  = 24;
-        daily   = 14;
+        hourly = 24;
+        daily = 14;
         monthly = 3;
-        yearly  = 0;
-        autosnap   = true;
-        autoprune  = true;
+        yearly = 0;
+        autosnap = true;
+        autoprune = true;
       };
       # Bulk storage: daily snapshots, longer retention.
       bulk = {
-        hourly  = 0;
-        daily   = 30;
+        hourly = 0;
+        daily = 30;
         monthly = 6;
-        yearly  = 1;
-        autosnap  = true;
+        yearly = 1;
+        autosnap = true;
         autoprune = true;
       };
     };
     datasets = {
-      "boot/home" = { use_template = [ "frequent" ]; };
-      "boot/var"  = { use_template = [ "frequent" ]; };
-      "data/databases" = { use_template = [ "frequent" ]; };
-      "bulk/media"    = { use_template = [ "bulk" ]; };
-      "bulk/backups"  = { use_template = [ "bulk" ]; };
+      "boot/home" = {
+        use_template = [ "frequent" ];
+      };
+      "boot/var" = {
+        use_template = [ "frequent" ];
+      };
+      "data/databases" = {
+        use_template = [ "frequent" ];
+      };
+      "bulk/media" = {
+        use_template = [ "bulk" ];
+      };
+      "bulk/pictures" = {
+        use_template = [ "bulk" ];
+      };
+      "bulk/backups" = {
+        use_template = [ "bulk" ];
+      };
       # downloads datasets intentionally omitted — transient data, not worth snapshotting.
     };
   };

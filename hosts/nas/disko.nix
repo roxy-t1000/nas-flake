@@ -285,6 +285,11 @@ in
           mountpoint = "/bulk/media";
           options.mountpoint = "legacy";
         };
+        pictures = {
+          type = "zfs_fs";
+          mountpoint = "/bulk/pictures";
+          options.mountpoint = "legacy";
+        };
         backups = {
           type = "zfs_fs";
           mountpoint = "/bulk/backups";
