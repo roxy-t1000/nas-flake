@@ -27,9 +27,12 @@ let
   ];
 
   # NAS host key — fill in after first boot.
-  nas = "";
+  nas = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBJNSyXBV7NH8j7C7V7qUDt80H4Hmp4+dN9qc6bPHjRY root@sylphiette"
+    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDb2Hd4GtesUtjcBpNIyMKR38hR92S3fTUsg8DVrAp6HAAQxZ1jClmhSzWnOmiwK0/xhJx8MroB0HQboRQ9HLTygkwEe49azYPoPl945GJGggYMm2vaHnIcWRdrvvsatgOgyXJv6UXS3MhyIVX2cuFpChK4T+dxgbl0e3wpHQltWjjcIQMyqGPQRhRx8LMRiFuPnO5KmQHKsGjvdgf5W6DhRcUB26SY5HAnwpqa4FrsiMFs6dTK9hvXoNeY5rpovXJN6JVuavbQBo8eBqcFCk4S4lYZyl4HMitWC4mBAvzXV2KT9tcJYuX0OvVRxMhpplx0KkhWML2FoXqNvoTX2uIafOpbhW+QFIpA1O2DHI0NM/Rguy5k31CLf1ec4/HF2ppejAKAJeMo/JdCfRr59o0uNkgQavF0rLeyq5/8N/tG078F+2LVjfrZWCavoIKIRtd+NSUyU07v7Gn4vO2nbFigAsE2jF3Pn+dxMH7yeoPntX2I3t7dh+pRWbbKHKJU8fuFOtykZx82bwUy7BjapR344rpJPqTBeq7P6XNWeN6mU1e/p7W+QRJPGBgYaSFMQu7AYMTTzPfy7NDhcOyp4RxLB3JppT4pcdjp+iT5ofG9XZzk/4vctcnxW0pbnhSu9feywZ70AVfEQ4ePZKeK6x4EDh/rmocgx3Fw47YZGkxIuQ== root@sylphiette"
+  ];
 
-  allKeys = anderson ++ [ nas ];
+  allKeys = anderson ++ nas;
 in
 {
   "tailscale-authkey.age".publicKeys = allKeys;

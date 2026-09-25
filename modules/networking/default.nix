@@ -1,13 +1,17 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ./nfs.nix ];
+  imports = [ 
+    ./dnsmasq.nix
+    ./nfs.nix 
+    ./samba.nix
+  ];
 
   # ── Firewall ─────────────────────────────────────────────────────────────────
   networking.firewall = {
     enable = true;
     # Tailscale interface is trusted; allow everything on it.
-    trustedInterfaces = [ "tailscale0" ];
+    trustedInterfaces = [ "tailscale0" "lan0" ];
     allowedUDPPorts = [ config.services.tailscale.port ];
   };
 
@@ -18,7 +22,6 @@
     authKeyFile = config.age.secrets.tailscale-authkey.path;
     # Advertise this machine as an exit node if desired; remove if not.
     extraUpFlags = [
-      "--advertise-tags=tag:nas"
       "--ssh" # enable Tailscale SSH as a fallback
     ];
   };

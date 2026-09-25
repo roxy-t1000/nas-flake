@@ -21,42 +21,5 @@
     builtins.elem (lib.getName pkg) [
       "unrar"
     ];
-  users.users.sabnzbd = {
-    isSystemUser = true;
-    group = "media";
-    home = "/var/lib/sabnzbd";
-    createHome = true;
-  };
-  # `media` group declared in qbittorrent.nix; reuse it here.
-
-  systemd.services.sabnzbd = {
-    description = "SABnzbd";
-    after = [
-      "network-online.target"
-      "zfs.target"
-    ];
-    wants = [ "network-online.target" ];
-    wantedBy = [ "multi-user.target" ];
-
-    serviceConfig = {
-      Type = "simple";
-      User = "sabnzbd";
-      Group = "media";
-      ExecStart = "${pkgs.sabnzbd}/bin/sabnzbd --server 0.0.0.0:8090 --config-file /var/lib/sabnzbd/sabnzbd.ini --nodaemon";
-      Restart = "on-failure";
-      RestartSec = "5s";
-
-      StateDirectory = "sabnzbd";
-
-      PrivateTmp = true;
-      ProtectSystem = "strict";
-      ReadWritePaths = [
-        "/data/downloads-incomplete"
-        "/bulk/downloads"
-        "/bulk/media"
-        "/var/lib/sabnzbd"
-      ];
-      NoNewPrivileges = true;
-    };
-  };
+  services.sabnzbd.enable = true;
 }

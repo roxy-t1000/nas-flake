@@ -1,7 +1,8 @@
 { config, ... }:
 let
-  wan0 = "enp3s0";
-  lan0 = "enp4s0";
+  wan0 = "enp2s0";
+  lan0 = "enp3s0";
+  lan1 = "enp4s0"; # realtek (ew)
 in
 {
   boot.kernel.sysctl = {
@@ -13,6 +14,7 @@ in
       enable = true;
       externalInterface = wan0;
       internalInterfaces = [ lan0 ];
+      internalIPs = [ "10.51.75.0/24" ];
     };
     interfaces = {
       ${wan0}.useDHCP = true;
@@ -24,7 +26,7 @@ in
           }
         ];
       };
-      dhcpd.denyInterfaces = [ lan0 ];
+      ${lan1}.useDHCP = false; # Currently unused.
     };
   };
   services.dnsmasq = {
@@ -35,7 +37,7 @@ in
       dhcp-range = "192.168.2.2,192.168.2.200,24h"; # leaves space for microcloud addressing
       dhcp-option = [
         "option:router,192.168.2.1"
-        "option:dns,192.168.2.1"
+        "option:dns-server,192.168.2.1"
       ];
       dhcp-host = [
         # microk8s nodes
@@ -49,6 +51,9 @@ in
         "02:26:26:02:2b:7d,cranky-carnotaurus,192.168.2.22"
         "02:26:26:02:16:b0,dapper-deinonychus,192.168.2.23"
         "02:26:26:02:2c:c2,fluffy-fruitadens,192.168.2.25"
+
+	# ai server/desktop
+	"9c:bf:0d:01:17:b4,yappy-yiqi,192.168.2.85"
       ];
       domain-needed = true;
       bogus-priv = true;

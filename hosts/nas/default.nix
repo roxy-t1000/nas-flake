@@ -34,6 +34,8 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIASQoj2af+NJf0jJ07sXtq3Vlze7mIbXRl9ygQpwMchD quanchobi@github/133457269"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC16UtJLGpXQJJc1tmgxRQQk81//joqSySs8dhGVszSF quanchobi@github/153779536"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKzi7tDEaGJ1bgXzirp9LCbvEmD9w8RYCC5nzGOk3Uku quanchobi@github/148591142"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKetltJ8DH+cCzPPh+7qaSKz9ojS/LhJmhLziH3uEyeQ root@blackbeard"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPd0nL0HOKDYDVbclyFQ/FVa1oQTCXnrWsqXv6bwApx4 hermes-agent" # Roxy
     ];
   };
 

@@ -60,8 +60,4 @@
       QBT_WEBUI_PORT = "8080";
     };
   };
-
-  # Only reachable via Tailscale (tailscale0 is a trusted interface).
-  networking.firewall.allowedTCPPorts = lib.mkIf false [ 8080 ];
-  # ^ intentionally disabled for LAN. Tailscale handles access.
 }

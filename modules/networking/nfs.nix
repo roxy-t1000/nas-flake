@@ -23,14 +23,15 @@
     enable = true;
     # NFSv4 only; no need for rpcbind/portmapper.
     exports = ''
-      # Tailscale CGNAT range — covers all your tailnet nodes.
-      # Tighten to specific IPs once you know them, e.g. 100.x.y.z/32.
+      /data/downloads-incomplete 100.64.0.0/10(rw,sync,no_subtree_check,no_root_squash)
+      /bulk/downloads  100.64.0.0/10(rw,sync,no_subtree_check)
       /data/databases  100.64.0.0/10(rw,sync,no_subtree_check,no_root_squash)
-      /bulk/media      100.64.0.0/10(ro,sync,no_subtree_check)
+      /bulk/media      100.64.0.0/10(rw,sync,no_subtree_check,no_root_squash)
+      /bulk/games      100.64.0.0/10(rw,sync,no_subtree_check,no_root_squash)
+      /bulk/pictures   100.64.0.0/10(rw,sync,no_subtree_check,no_root_squash)
       /bulk/backups    100.64.0.0/10(rw,sync,no_subtree_check,no_root_squash)
+      /bulk/games      100.64.0.0/10(rw,sync,no_subtree_check,no_root_squash)
     '';
   };
-
-  # NFSv4 only needs port 2049; rpcbind (111) not required.
   networking.firewall.allowedTCPPorts = [ 2049 ];
 }

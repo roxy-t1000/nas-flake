@@ -7,7 +7,7 @@
     settings = {
       global = {
         # Bind only to the Tailscale interface
-        "interfaces" = "tailscale0";
+        interfaces = "tailscale0 enp2s0";
         "bind interfaces only" = "yes";
 
         "workgroup" = "WORKGROUP";
@@ -25,4 +25,8 @@
       };
     };
   };
+systemd.services.samba-smbd.after = [ "tailscaled.service" "tailscaled-autoconnect.service" ];
+systemd.services.samba-smbd.wants = [ "tailscaled.service" "tailscaled-autoconnect.service" ];
+systemd.services.samba-nmbd.after = [ "tailscaled.service" "tailscaled-autoconnect.service" ];
+systemd.services.samba-nmbd.wants = [ "tailscaled.service" "tailscaled-autoconnect.service" ];
 }
