@@ -6,8 +6,8 @@
 
     settings = {
       global = {
-        # Bind only to the Tailscale interface
-        interfaces = "tailscale0 enp2s0";
+        # Bind only to Tailscale and the NAS LAN interface (not the WAN interface).
+        interfaces = "tailscale0 enp3s0";
         "bind interfaces only" = "yes";
 
         "workgroup" = "WORKGROUP";

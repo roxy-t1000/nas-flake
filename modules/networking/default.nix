@@ -1,17 +1,17 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ 
+  imports = [
     ./dnsmasq.nix
-    ./nfs.nix 
+    ./nfs.nix
     ./samba.nix
   ];
 
   # ── Firewall ─────────────────────────────────────────────────────────────────
   networking.firewall = {
     enable = true;
-    # Tailscale interface is trusted; allow everything on it.
-    trustedInterfaces = [ "tailscale0" "lan0" ];
+    # Trust Tailscale and the LAN interface (enp3s0), not the WAN interface.
+    trustedInterfaces = [ "tailscale0" "enp3s0" ];
     allowedUDPPorts = [ config.services.tailscale.port ];
   };
 

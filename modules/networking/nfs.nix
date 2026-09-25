@@ -26,11 +26,10 @@
       /data/downloads-incomplete 100.64.0.0/10(rw,sync,no_subtree_check,no_root_squash)
       /bulk/downloads  100.64.0.0/10(rw,sync,no_subtree_check)
       /data/databases  100.64.0.0/10(rw,sync,no_subtree_check,no_root_squash)
-      /bulk/media      100.64.0.0/10(rw,sync,no_subtree_check,no_root_squash)
+      /bulk/media      100.64.0.0/10(ro,sync,no_subtree_check)
       /bulk/games      100.64.0.0/10(rw,sync,no_subtree_check,no_root_squash)
       /bulk/pictures   100.64.0.0/10(rw,sync,no_subtree_check,no_root_squash)
       /bulk/backups    100.64.0.0/10(rw,sync,no_subtree_check,no_root_squash)
-      /bulk/games      100.64.0.0/10(rw,sync,no_subtree_check,no_root_squash)
     '';
   };
   networking.firewall.allowedTCPPorts = [ 2049 ];
